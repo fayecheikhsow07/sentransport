@@ -10,8 +10,13 @@
   border-radius: 8px;
   outline: none;
   box-sizing: border-box;
+  transition: border-color 0.2s;
 }
 
 .recherche-input:focus {
-  border-color: #e67e22;
+  border-color: #0a6e31;
+}
+
+.recherche-input::placeholder {
+  color: #b2bec3;
 }
