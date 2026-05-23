@@ -92,5 +92,18 @@
       "HLM",
       "Sandaga"
     ]
-  }
+  },
+  {
+  "id": 7, "numero": "3",
+  "depart": "Fann", "arrivee": "HLM",
+  "arrets": 9,
+  "listeArrets": ["Fann", "Point E", "Liberte", "HLM"]
+},
+{
+  "id": 8, "numero": "18",
+  "depart": "Liberté", "arrivee": "Dieuppeul",
+  "arrets": 7,
+  "listeArrets": ["Liberte 6", "Liberte 5", "Sicap", "Dieuppeul"]
+}
+
 ]

@@ -5,6 +5,7 @@ import Recherche from './Recherche';
 import LigneBus from './LigneBus';
 import DetailLigne from './DetailLigne';
 import Footer from './Footer';
+import Carte from './Carte';
 
 function App() {
   // États principaux
@@ -15,8 +16,10 @@ function App() {
   const [ligneSelectionnee, setLigneSelectionnee] = useState(null);
   const [nombreRecherches, setNombreRecherches] = useState(0);
 
-  // Charger les données au démarrage
-  useEffect(() => {
+  // Fonction pour charger toutes les lignes
+  function chargerLignes() {
+    setChargement(true);
+    setErreur(null);
     fetch("http://localhost:5000/lignes")
       .then(response => {
         if (!response.ok) {
@@ -32,6 +35,11 @@ function App() {
         setErreur(error.message);
         setChargement(false);
       });
+  }
+
+  // Charger les données au démarrage
+  useEffect(() => {
+    chargerLignes();
   }, []);
 
   // Filtrage des lignes
@@ -41,12 +49,23 @@ function App() {
     l.numero.includes(recherche)
   );
 
-  // Gestion du clic sur une ligne
-  function handleClickLigne(ligne) {
-    setLigneSelectionnee(
-      ligneSelectionnee && ligneSelectionnee.id === ligne.id ? null : ligne
-    );
+  // Gestion du clic sur une ligne → requête GET /lignes/<id>
+function handleClickLigne(ligne) {
+  if (ligneSelectionnee && ligneSelectionnee.id === ligne.id) {
+    setLigneSelectionnee(null);
+    return;
   }
+  setErreur(null);
+  fetch(`http://localhost:5000/lignes/${ligne.id}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Erreur serveur : " + response.status);
+      }
+      return response.json();
+    })
+    .then(data => setLigneSelectionnee(data))
+    .catch(err => setErreur(err.message));
+}
 
   // Gestion de la recherche
   function handleRecherche(texte) {
@@ -102,6 +121,10 @@ function App() {
           <div className="aucun-resultat">Aucune ligne trouvée</div>
         )}
 
+        <button onClick={chargerLignes} className="btn-recharger">
+          Recharger
+        </button>
+
         {lignesFiltrees.map(ligne => (
           <LigneBus
             key={ligne.id}
@@ -115,6 +138,7 @@ function App() {
         ))}
 
         {ligneSelectionnee && <DetailLigne ligne={ligneSelectionnee} />}
+     <Carte />
       </main>
       <Footer />
     </div>
