@@ -1,7 +1,17 @@
-.Header {
-  background-color: #e67e22;
+.header {
+  background-color: #0a6e31;
   color: white;
-  padding: 1rem;
+  padding: 20px;
   text-align: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.header-titre {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.header-soustitre {
+  margin: 5px 0 0 0;
+  font-size: 1rem;
+  opacity: 0.9;
 }

@@ -1,0 +1,23 @@
+.stat-reseau {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.stat-carte {
+  flex: 1;
+  min-width: 180px;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.stat-carte h3 {
+  margin-top: 0;
+  font-size: 2rem;
+  color: #0a6e31;
+}
+.stat-carte p {
+  margin-top: 8px;
+  color: #555;
+}
