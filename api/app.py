@@ -21,6 +21,29 @@ def accueil():
         "message": "Bienvenue sur l'API SenTransport !",
         "endpoints": ["/lignes", "/lignes/<id>", "/arrets", "/stats", "/lignes/recherche?q=..."]
     })
+# Endpoint pour les incidents
+incidents = []
+
+@app.route("/incidents", methods=["GET"])
+def get_incidents():
+    return jsonify(incidents)
+
+@app.route("/incidents", methods=["POST"])
+def post_incident():
+    data = request.get_json()
+    if not data or "ligne" not in data or "description" not in data:
+        return jsonify({"erreur": "Champs requis manquants"}), 400
+    
+    incident = {
+        "id": len(incidents) + 1,
+        "ligne": data["ligne"],
+        "description": data["description"],
+        "lieu": data.get("lieu", "Non précisé"),
+    }
+    incidents.append(incident)
+    return jsonify(incident), 201
+
+
 
 @app.route("/lignes")
 def get_lignes():
@@ -55,3 +78,4 @@ def rechercher_lignes():
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
+ 

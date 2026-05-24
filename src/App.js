@@ -6,6 +6,10 @@ import LigneBus from './LigneBus';
 import DetailLigne from './DetailLigne';
 import Footer from './Footer';
 import Carte from './Carte';
+import Meteo from './Meteo';
+import SignalerIncident from './SignalerIncident';
+import ListeIncidents from './ListeIncidents';
+
 
 function App() {
   // États principaux
@@ -109,6 +113,7 @@ function handleClickLigne(ligne) {
     <div className="App">
       <Header />
       <main className="contenu">
+         <Meteo />
         <p className="nombre-recherches">
           Vous avez effectué {nombreRecherches} recherche(s)
         </p>
@@ -139,6 +144,8 @@ function handleClickLigne(ligne) {
 
         {ligneSelectionnee && <DetailLigne ligne={ligneSelectionnee} />}
      <Carte />
+     <SignalerIncident /> 
+     <ListeIncidents />
       </main>
       <Footer />
     </div>
